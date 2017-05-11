@@ -1,0 +1,9 @@
+example_id                                     | status | run_time        |
+---------------------------------------------- | ------ | --------------- |
+./spec/requests/api/v1/users_sprec.rb[1:1:1:1] | passed | 0.01567 seconds |
+./spec/requests/api/v1/users_sprec.rb[1:1:1:2] | passed | 0.01505 seconds |
+./spec/requests/api/v1/users_sprec.rb[1:1:2:1] | passed | 0.01864 seconds |
+./spec/requests/api/v1/users_sprec.rb[1:2:1:1] | passed | 0.01784 seconds |
+./spec/requests/api/v1/users_sprec.rb[1:2:1:2] | passed | 0.79924 seconds |
+./spec/requests/api/v1/users_sprec.rb[1:2:2:1] | passed | 0.01954 seconds |
+./spec/requests/api/v1/users_sprec.rb[1:2:2:2] | passed | 0.02014 seconds |
