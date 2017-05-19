@@ -58,7 +58,7 @@ RSpec.describe 'Users API', type: :request do
 			end
 
 			it 'returns the json data for the erros' do
-				expect(json_body).to have_key(:errors)  
+				expect(json_body).to have_key(:errors)
 			end
 		end
 	end
@@ -83,7 +83,7 @@ RSpec.describe 'Users API', type: :request do
 			let(:user_params) { { email: 'invalid_email@' } }
 
 			it 'return status code 422' do
-				expect(response).to have_http_status(422) 
+				expect(response).to have_http_status(422)
 			end
 
 			it 'returns the json data for the erros' do
