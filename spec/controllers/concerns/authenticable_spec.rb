@@ -11,7 +11,7 @@ RSpec.describe Authenticable do
     let(:user) { create(:user) }
 
 	  before do
-	  	req =  double(headers: { 'Autorization' => user.auth_token })
+	  	req =  double(headers: { 'Authorization' => user.auth_token })
 	  	allow(app_controller).to receive(:request).and_return(req)
 	  end
 
