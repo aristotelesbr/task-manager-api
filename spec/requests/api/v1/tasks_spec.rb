@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Task API' do
-  before { host! 'api.taskmanager.dev'}
+  before { host! 'api.taskmanager.dev' }
 
   # Create this moment '!'
   let!(:user) { create(:user) }
@@ -21,7 +21,7 @@ RSpec.describe 'Task API' do
     end
 
     it 'returns status code 200' do
-      expect(response).to have_http_status(200)  
+      expect(response).to have_http_status(200)
     end
 
     it 'returns 5 tasks from database' do
@@ -33,13 +33,13 @@ RSpec.describe 'Task API' do
     let(:task) { create(:task, user_id: user.id) }
 
     before { get "/tasks/#{task.id}", params: {}, headers: headers }
-  
+
     it 'returns status code 200' do
-      expect(response).to have_http_status(200)  
+      expect(response).to have_http_status(200)
     end
 
     it 'returns json for task' do
-      expect(json_body[:title]).to eq(task.title)  
+      expect(json_body[:title]).to eq(task.title)
     end
   end
 
@@ -51,9 +51,9 @@ RSpec.describe 'Task API' do
     context 'when the params are valid' do
       # Creat hash object params
       let(:task_params) { attributes_for(:task) }
-      
+
       it 'returns status code 201' do
-        expect(response).to have_http_status(201)  
+        expect(response).to have_http_status(201)
       end
 
       it 'saves the task in database' do
@@ -61,11 +61,11 @@ RSpec.describe 'Task API' do
       end
 
       it 'returns the json for created task' do
-        expect(json_body[:title]).to eq(task_params[:title]) 
+        expect(json_body[:title]).to eq(task_params[:title])
       end
 
       it 'assing the created task do the current user' do
-        expect(json_body[:user_id]).to eq(user.id) 
+        expect(json_body[:user_id]).to eq(user.id)
       end
 
       context 'when the params are invalid' do
@@ -83,7 +83,6 @@ RSpec.describe 'Task API' do
           expect(json_body[:errors]).to have_key(:title)
         end
       end
-
     end
   end
 
@@ -92,37 +91,37 @@ RSpec.describe 'Task API' do
     before do
       put "/tasks/#{task.id}", params: { task: task_params }.to_json, headers: headers
     end
-    
+
     context 'when the params are valid' do
-      let(:task_params){ {title: 'New task title'} }
-    
+      let(:task_params) { { title: 'New task title' } }
+
       it 'returns status code 200' do
         expect(response).to have_http_status(200)
       end
 
       it 'returns the json for updated task' do
-        expect(json_body[:title]).to eq(task_params[:title])  
+        expect(json_body[:title]).to eq(task_params[:title])
       end
-      
+
       it 'updates the task in the database' do
-        expect( Task.find_by(title: task_params[:title])).not_to be_nil
+        expect(Task.find_by(title: task_params[:title])).not_to be_nil
       end
     end
     context 'when the params are invalid' do
-      let(:task_params){ {title: '  '} }
-    
+      let(:task_params) { { title: '  ' } }
+
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
       end
 
       it 'returns the json error for title' do
-        expect(json_body[:errors]).to have_key(:title) 
+        expect(json_body[:errors]).to have_key(:title)
       end
-      
+
       it 'does not updates the task in the database' do
-        expect( Task.find_by(title: task_params[:title]) ).to be_nil
+        expect(Task.find_by(title: task_params[:title])).to be_nil
       end
-    end 
+    end
   end
 
   describe 'DELETE /task/:id' do
